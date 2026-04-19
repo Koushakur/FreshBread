@@ -6,10 +6,10 @@ Also adds a hotkey to open the most recently opened breadboard (default key 'Y')
 
 Also changes default grid size to 25 rather than 50. That's entirely just for me, I got tired of changing it in every single breadboard
 
-v1.1.0 adds keyboard shurtcuts to quick-add components
-Exhaustive list: https://pastebin.com/sMDUNQth
-Alt + [Letter] OR Alt + [Letter][Letter]
-Depending on if it had to share a letter or not.
+v1.1.0 adds keyboard shurtcuts to quick-add components  
+Exhaustive list: https://pastebin.com/sMDUNQth  
+Alt + [Letter] OR Alt + [Letter][Letter]  
+Depending on if it had to share a letter or not.  
  
 Examples:
 Alt + R places a Rotation component

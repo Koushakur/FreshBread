@@ -1,0 +1,9 @@
+{
+   "_comments": "QoL",
+   "name": "FreshBread",
+   "version": "1.0.0",
+   "gameversion": "4.3.0",
+   "depends": [],
+   "conflicts": [],
+   "filename": "0Harmony.dll,FreshBread.dll"
+}

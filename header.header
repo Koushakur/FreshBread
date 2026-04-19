@@ -1,0 +1,9 @@
+{
+  "Authors": "Duker",
+  "Version": "00000000-0000-0000-0000-000000000000",
+  "ComponentId": {
+    "Guid": "0299a94d-cd4c-4848-b20d-1218aa39dda1",
+    "Name": "FreshBread"
+  },
+  "Description": "Freshens up the Breadboard UI"
+}

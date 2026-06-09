@@ -14,3 +14,5 @@ Depending on if it had to share a letter or not.
 Examples:
 Alt + R places a Rotation component
 Alt + G -> S without releasing alt inbetween places a Generic block Setter 
+
+v1.2.0 Adds ability to recolor all selected components

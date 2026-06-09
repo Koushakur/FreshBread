@@ -14,10 +14,10 @@ namespace FreshBread.Patches {
 
         [HarmonyPatch(typeof(Component), "CreateColorPickers")]
         public class Patch_Component_CreateColorPickers {
-            static readonly FieldInfo _selectedComponents = AccessTools.Field(typeof(CircuitBoardDisplay), "_selectedComponents");
+            static readonly FieldInfo _selectedComponentsField = AccessTools.Field(typeof(CircuitBoardDisplay), "_selectedComponents");
 
-            static bool Prefix(Component __instance, IScreenSegment segment, CircuitBoardDisplay CB_display) {
-                var selected = (List<Component>)_selectedComponents.GetValue(CB_display);
+            static bool Prefix(Component __instance, IScreenSegment segment, CircuitBoardDisplay displayer) {
+                var selected = (List<Component>)_selectedComponentsField.GetValue(displayer);
 
                 VarColor proxy = new VarColor(__instance.OutlineColor.Us);
                 proxy.SetChangeAction((Action)delegate {

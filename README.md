@@ -16,3 +16,4 @@ Alt + R places a Rotation component
 Alt + G -> S without releasing alt inbetween places a Generic block Setter 
 
 v1.2.0 Adds ability to recolor all selected components
+v1.2.1 Now dynamically reserves space for buttons above main circuit box instead of being hardcoded

@@ -11,6 +11,15 @@ namespace FreshBread.Patches {
     [HarmonyPatch(typeof(CircuitSegment), "UiEntry")]
     public class Patch_CircuitSegment {
 
+        private static float _buttonsReservedHeight = 66f;
+
+        private static float GetCurrentOffset() {
+            if (Event.current.type == EventType.Repaint) {
+                _buttonsReservedHeight = GUILayoutUtility.GetLastRect().y + 3;
+            }
+            return _buttonsReservedHeight;
+        }
+
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
 
             MethodInfo _GUILayoutSpaceMethod = AccessTools.Method(
@@ -18,29 +27,32 @@ namespace FreshBread.Patches {
                nameof(GUILayout.Space),
                new[] { typeof(float) });
 
+            var offsetGetter = AccessTools.Method(typeof(Patch_CircuitSegment), nameof(GetCurrentOffset));
+
             foreach (CodeInstruction instruction in instructions) {
 
+                //Change spacing between bottom of window and bread circuit panel
                 if (instruction.opcode == OpCodes.Ldc_R4
-                    && instruction.operand is float f) {
+                    && instruction.operand is float f
+                    && f == 60f) {
 
-                    if (f == 145f)
-                        //Change spacing between top of window and bread circuit panel
-                        yield return new CodeInstruction(OpCodes.Ldc_R4, 77f);
-
-                    else if (f == 60f)
-                        //Change spacing between bottom of window and bread circuit panel
-                        yield return new CodeInstruction(OpCodes.Ldc_R4, 40f);
-
-                    else
-                        yield return instruction;
+                    yield return new CodeInstruction(OpCodes.Ldc_R4, 40f);
 
 
                     //Remove empty space segment being added to the bottom
                 } else if (instruction.opcode == OpCodes.Call
-                    && instruction.operand is MethodInfo mi
-                    && mi == _GUILayoutSpaceMethod) {
+                       && instruction.operand is MethodInfo mi
+                       && mi == _GUILayoutSpaceMethod) {
 
                     yield return new CodeInstruction(OpCodes.Pop);
+
+
+                    //Makes offset to top of window be what's actually needed instead of a hardcoded one
+                } else if (instruction.opcode == OpCodes.Stloc_1) {
+
+                    yield return new CodeInstruction(OpCodes.Pop);
+                    yield return new CodeInstruction(OpCodes.Call, offsetGetter);
+                    yield return new CodeInstruction(OpCodes.Stloc_1);
 
 
                 } else {

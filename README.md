@@ -1,6 +1,5 @@
 ### Freshens up the breadboard UI
-[It's best shown as it's nearly all visual](https://slow.pics/s/RAFU4UKT)\
-Click on the image after it loads to toggle between modified and regular
+[Here's a side-by-side comprison to unmodified](https://slow.pics/s/RAFU4UKT)
 
 Also adds a hotkey to open the most recently opened breadboard (default key 'Y'), ported from the [BreadThing mod](https://steamcommunity.com/sharedfiles/filedetails/?id=3540650411).  
 
@@ -16,4 +15,5 @@ Alt + R places a Rotation component
 Alt + G -> S without releasing alt inbetween places a Generic block Setter 
 
 v1.2.0 Adds ability to recolor all selected components  
-v1.2.1 Now dynamically reserves space for buttons above main circuit box instead of being hardcoded
+v1.2.1 Now dynamically reserves space for buttons above main circuit box instead of being hardcoded  
+v1.2.2 Simplified change to Prefab Load UI, as a result it now scales more gracefully with window width

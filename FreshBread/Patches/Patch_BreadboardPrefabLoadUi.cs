@@ -37,15 +37,17 @@ namespace FreshBread.Patches {
 
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(prefabFile);
 
-                    prefabListTableSegment.AddInterpretter(SubjectiveButton<string>.Quick(prefabFile, fileNameWithoutExtension, new ToolTip("Load prefab: " + fileNameWithoutExtension), delegate (string path) {
+                    ScreenSegmentStandardHorizontal screenSegmentStandardHorizontal2 = consoleWindow.Screen.CreateStandardHorizontalSegment();
+                    screenSegmentStandardHorizontal2.SpaceAbove = 0f;
+                    screenSegmentStandardHorizontal2.AddInterpretter(SubjectiveButton<string>.Quick(prefabFile, fileNameWithoutExtension, new ToolTip("Load prefab: " + fileNameWithoutExtension), delegate (string path) {
                         Vector2 mousePosition = new Vector2(__instance._focus.Display.Width / 2f, __instance._focus.Display.Height / 2f);
                         if (__instance._focus.Display.LoadPrefab(path, mousePosition)) {
                             __instance.DeactivateGui();
                         }
                     }));
-
                     bool flag = __instance._focus.PendingDeleteFile == prefabFile;
-                    prefabListTableSegment.AddInterpretter(SubjectiveButton<string>.Quick(prefabFile, flag ? "Confirm Delete?" : "Delete", new ToolTip(flag ? ("Click again to confirm deletion of " + fileNameWithoutExtension) : ("Delete prefab: " + fileNameWithoutExtension)), delegate (string path) {
+
+                    var tButton = SubjectiveButton<string>.Quick(prefabFile, flag ? "Confirm Delete?" : "Delete", new ToolTip(flag ? ("Click again to confirm deletion of " + fileNameWithoutExtension) : ("Delete prefab: " + fileNameWithoutExtension)), delegate (string path) {
                         if (__instance._focus.PendingDeleteFile == path) {
                             __instance._focus.DeletePrefab(path);
                             __instance._focus.PendingDeleteFile = null!;
@@ -54,7 +56,11 @@ namespace FreshBread.Patches {
                             __instance._focus.PendingDeleteFile = path;
                             __instance.TriggerRebuild();
                         }
-                    }));
+                    });
+
+                    tButton.PrescribedWidth = new PixelSizing(100, Dimension.Width);
+
+                    screenSegmentStandardHorizontal2.AddInterpretter(tButton);
                 }
 
             } else {

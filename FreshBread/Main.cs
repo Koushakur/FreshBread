@@ -6,7 +6,7 @@ namespace FreshBread {
     public class FrDInterface : GamePlugin_PostLoad {
         public string name => "FreshBread";
 
-        public Version version => new Version(1, 2, 1);
+        public Version version => new Version(1, 2, 2);
 
         public void OnLoad() {
             new Harmony("FreshBread").PatchAll();

@@ -8,6 +8,7 @@ using BrilliantSkies.Blocks.BreadBoards;
 using BrilliantSkies.Common.Circuits.Ui;
 using BrilliantSkies.Ftd.Avatar.Movement;
 using BrilliantSkies.Ui.Consoles;
+using BrilliantSkies.Blocks.MissileBreadboard;
 
 namespace FreshBread.Patches {
 
@@ -34,15 +35,24 @@ namespace FreshBread.Patches {
 
         private static AiBreadboard? _aiBreadboard;
         private static BreadBoard? _breadBoard;
+        private static MissileBreadboardBlock? _missileBreadboard;
 
         public static void SetAiBoard(AiBreadboard board) {
             _aiBreadboard = board;
             _breadBoard = null;
+            _missileBreadboard = null;
         }
 
         public static void SetNonAiBoard(BreadBoard board) {
             _aiBreadboard = null;
             _breadBoard = board;
+            _missileBreadboard = null;
+        }
+
+        public static void SetMissileBoard(MissileBreadboardBlock board) {
+            _aiBreadboard = null;
+            _breadBoard = null;
+            _missileBreadboard = board;
         }
 
         public static void ActivateLastBread() {
@@ -54,6 +64,10 @@ namespace FreshBread.Patches {
 
                 } else if ((Block)(object)_aiBreadboard! != (Block)null! && ((Block)_aiBreadboard).IsAlive) {
                     ((Block)_aiBreadboard).Secondary((Transform)null!);
+                    FreshBreadGlobal.BreadWasClosed = false;
+
+                } else if ((Block)(object)_missileBreadboard! != (Block)null! && ((Block)_missileBreadboard).IsAlive) {
+                    ((Block)_missileBreadboard).Secondary((Transform)null!);
                     FreshBreadGlobal.BreadWasClosed = false;
 
                 }
@@ -72,6 +86,13 @@ namespace FreshBread.Patches {
     public class PatchAiBreadboardSecondaryPostfix {
         private static void Postfix(AiBreadboard __instance) {
             LastActiveBread.SetAiBoard(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(MissileBreadboardBlock), "Secondary")]
+    public class PatchMissileBreadboardSecondaryPostfix {
+        private static void Postfix(MissileBreadboardBlock __instance) {
+            LastActiveBread.SetMissileBoard(__instance);
         }
     }
 

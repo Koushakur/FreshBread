@@ -268,7 +268,7 @@
       ]
     },
     {
-      "PanelName": "Animation",
+      "PanelName": "Animation & Audio",
       "NumberOfColumns": 3,
       "Components": [
         {
@@ -345,15 +345,15 @@
         },
         {
           "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.GuidanceEnableOutput"
+        },
+        {
+          "NameOverride": "",
           "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SetTargetPositionOutput"
         },
         {
           "NameOverride": "",
           "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SetTargetOffsetOutput"
-        },
-        {
-          "NameOverride": "",
-          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.GuidanceEnableOutput"
         }
       ]
     },

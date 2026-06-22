@@ -2,11 +2,12 @@
 using System;
 using BrilliantSkies.Modding;
 
+
 namespace FreshBread {
     public class FrDInterface : GamePlugin_PostLoad {
         public string name => "FreshBread";
 
-        public Version version => new Version(1, 2, 2);
+        public Version version => new Version(1, 3, 0);
 
         public void OnLoad() {
             new Harmony("FreshBread").PatchAll();

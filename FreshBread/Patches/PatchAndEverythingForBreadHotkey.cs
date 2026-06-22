@@ -1,7 +1,4 @@
 ﻿using HarmonyLib;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using BrilliantSkies.Blocks;
 using BrilliantSkies.Blocks.BreadBoards;
@@ -10,26 +7,8 @@ using BrilliantSkies.Ftd.Avatar.Movement;
 using BrilliantSkies.Ui.Consoles;
 using BrilliantSkies.Blocks.MissileBreadboard;
 
+
 namespace FreshBread.Patches {
-
-    public static class FreshBreadGlobal {
-
-        public static KeyCode ReopenBreadKey = (KeyCode)121; //Y default
-        public static bool BreadWasClosed = true;
-        static FreshBreadGlobal() {
-
-            string modFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var keycodePath = Path.Combine(modFolder, "keycode.txt");
-
-            if (File.Exists(keycodePath)) {
-
-                int readCode;
-                var parseSuccess = int.TryParse(File.ReadLines(keycodePath).First(), out readCode);
-                if (parseSuccess) ReopenBreadKey = (KeyCode)readCode;
-
-            }
-        }
-    }
 
     public static class LastActiveBread {
 
@@ -100,7 +79,6 @@ namespace FreshBread.Patches {
     [HarmonyPatch(typeof(cCameraControl), "RunLateUpdate")]
     public class PatchcCameraControlRunLateUpdatePrefix {
         static void Postfix() {
-
             if (Input.GetKeyDown(FreshBreadGlobal.ReopenBreadKey) && !Input.GetKey((KeyCode)306) && !Input.GetKey((KeyCode)305) && !Input.GetKey((KeyCode)308) && !Input.GetKey((KeyCode)307) && !Input.GetKey((KeyCode)304) && !Input.GetKey((KeyCode)303)) {
                 LastActiveBread.ActivateLastBread();
             }

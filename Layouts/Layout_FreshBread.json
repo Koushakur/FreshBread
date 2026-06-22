@@ -1,0 +1,453 @@
+{
+  "LayoutName": "Fresh Bread",
+  "SpacingBetweenPanels": 8,
+  "ComponentHeight": 30,
+  "Panels": [
+    {
+      "PanelName": "Utilities",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.GenericGetter.GenericBlockGetter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.GenericBlockSetter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Pid"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Printer"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Inputs.Comment"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Inputs.Anchor"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.VariableReaderInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.VariableWriter"
+        }
+      ]
+    },
+    {
+      "PanelName": "Get Information",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Inputs.ConstantInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Inputs.RandomInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.TimeInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.TimeOfDayInput"
+        }
+      ]
+    },
+    {
+      "PanelName": "",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.AltitudeInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.PositionInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.SpeedInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.StabilityInput"
+        },
+        {
+          "NameOverride": "Orientation",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.OrientationInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.RotationInput"
+        }
+      ]
+    },
+    {
+      "PanelName": "",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiTargetInfo"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiSteeringpointInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.SelfVehicleInfo"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.VehicleOriginPosition"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.FriendlyVehicleByDistance"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.FriendlyVehicleByID"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.ControlInput"
+        },
+        {
+          "NameOverride": "Custom Propulsion",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.CustomPropulsionInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.ComplexControlInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.EventInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.FlagshipInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Inputs.AIManoeuvreOutput"
+        }
+      ]
+    },
+    {
+      "PanelName": "Math & Logic",
+      "NumberOfColumns": 1,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Evaluator"
+        }
+      ]
+    },
+    {
+      "PanelName": "",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Multiply"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Adder"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Clamp"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.LogicGate"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.MaxMin"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Sorter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Distance2D"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Differencer"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Accumulator"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.QuaternionSplitter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.FuzzyThreshold"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Switch"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Vector3Splitter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Vector3Combiner"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.VectorMagnitude"
+        }
+      ]
+    },
+    {
+      "PanelName": "",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.OneShot"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Delay"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiBehaviourSelect"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiManoeuvreSelect"
+        }
+      ]
+    },
+    {
+      "PanelName": "Output Information",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.PropulsionModule"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.CustomPropulsionSetter"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.DriveModule"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.AIBehaviourInput"
+        }
+      ]
+    },
+    {
+      "PanelName": "Animation",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "Control",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.AnimatorControl"
+        },
+        {
+          "NameOverride": "Position",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.AnimatorBulkPosition"
+        },
+        {
+          "NameOverride": "Body Look",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.BodyPositionControl"
+        },
+        {
+          "NameOverride": "LINK Edit",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.AnimatorLinkEditor"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.LinkSource"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.LinkDestination"
+        },
+        {
+          "NameOverride": "IK Position",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.IkPositionControl"
+        },
+        {
+          "NameOverride": "IK Rotation",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Animator.IkRotationControl"
+        },
+        {
+          "NameOverride": "Audio Playback",
+          "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Playback"
+        }
+      ]
+    },
+    {
+      "PanelName": "Missile Misc.",
+      "NumberOfColumns": 2,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.TargetInfo"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SelfInfo"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.MissileTimeInput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.LaunchVehicleInfo"
+        }
+      ]
+    },
+    {
+      "PanelName": "",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ThrustOutput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.DetonateOutput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SetTargetPositionOutput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SetTargetOffsetOutput"
+        },
+        {
+          "NameOverride": "",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.GuidanceEnableOutput"
+        }
+      ]
+    },
+    {
+      "PanelName": "Missile Input",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "Turning Thruster In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.TurningThrusterParametersInput"
+        },
+        {
+          "NameOverride": "Seeker In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SeekerParametersInput"
+        },
+        {
+          "NameOverride": "Ballast In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.BallastParametersInput"
+        },
+        {
+          "NameOverride": "Cluster Controller In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ClusterControllerParametersInput"
+        },
+        {
+          "NameOverride": "Cluster Ejector In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ClusterEjectorParametersInput"
+        },
+        {
+          "NameOverride": "APN Guidance In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.APNGuidanceParametersInput"
+        },
+        {
+          "NameOverride": "One-Turn In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.OneTurnParametersInput"
+        },
+        {
+          "NameOverride": "Proximity Fuse In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ProximityFuseParametersInput"
+        },
+        {
+          "NameOverride": "Altitude Fuse In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.AltitudeFuseParametersInput"
+        },
+        {
+          "NameOverride": "Interceptor In",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.InterceptorParametersInput"
+        }
+      ]
+    },
+    {
+      "PanelName": "Missile Output",
+      "NumberOfColumns": 3,
+      "Components": [
+        {
+          "NameOverride": "Turning Thruster Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.TurningThrusterParametersOutput"
+        },
+        {
+          "NameOverride": "Seeker Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.SeekerParametersOutput"
+        },
+        {
+          "NameOverride": "Ballast Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.BallastParametersOutput"
+        },
+        {
+          "NameOverride": "Cluster Controller Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ClusterControllerParametersOutput"
+        },
+        {
+          "NameOverride": "Cluster Ejector Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ClusterEjectorParametersOutput"
+        },
+        {
+          "NameOverride": "APN Guidance Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.APNGuidanceParametersOutput"
+        },
+        {
+          "NameOverride": "One-Turn Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.OneTurnParametersOutput"
+        },
+        {
+          "NameOverride": "Proximity Fuse Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.ProximityFuseParametersOutput"
+        },
+        {
+          "NameOverride": "Altitude Fuse Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.AltitudeFuseParametersOutput"
+        },
+        {
+          "NameOverride": "Interceptor Out",
+          "ComponentClass": "BrilliantSkies.Ftd.Missiles.Breadboard.InterceptorParametersOutput"
+        }
+      ]
+    }
+  ]
+}

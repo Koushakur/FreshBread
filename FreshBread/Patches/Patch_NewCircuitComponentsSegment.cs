@@ -10,8 +10,7 @@ using BrilliantSkies.Ui.Consoles;
 using BrilliantSkies.Ui.Consoles.Styles;
 using BrilliantSkies.Ui.Elements;
 using BrilliantSkies.Ui.Tips;
-using System.Reflection.Emit;
-using System.Reflection;
+using BrilliantSkies.Core.Logger;
 
 
 namespace FreshBread.Patches {
@@ -21,74 +20,100 @@ namespace FreshBread.Patches {
         [HarmonyPatch(typeof(NewCircuitComponentsSegment), "UiEntry")]
         public class Patch_UiEntry {
 
-            static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+            static bool Prefix(
+                NewCircuitComponentsSegment __instance,
+                ScreenSegmentDisplayOptions options,
+                CircuitBoardDisplay ____ourBoardDisplay
+            ) {
+                var _locFile = (BrilliantSkies.Localisation.Runtime.FileManagers.Files.LocFile)NewCircuitComponentsSegment._locFile;
 
-                MethodInfo _GUILayoutSpaceMethod = AccessTools.Method(
-                  typeof(GUILayout),
-                  nameof(GUILayout.Space),
-                  new[] { typeof(float) });
-
-                var codes = new List<CodeInstruction>(instructions);
-
-                for (var i = 0; i < codes.Count(); i++) {
-                    if (codes[i].opcode == OpCodes.Call
-                        && codes[i].operand is MethodInfo mi
-                        && mi == _GUILayoutSpaceMethod) {
-
-                        codes[i - 1].operand = 15f;
-                    }
+                int count = ____ourBoardDisplay.OurBoard.Packages.Count;
+                int num = 9990;
+                options._s.Display.DisplayText.Layout(_locFile.Format("Display_ComponentsUsed", "<b>{0} / {1} components used</b>", count, num), "compCount");
+                if (GUI.tooltip == "compCount") {
+                    TipDisplayer.Instance.SetTip(new ToolTip(_locFile.Get("Tip_NotSave", "You cannot exceed this maximum number of components (or the breadboard will not save!)")));
+                }
+                GUILayout.Space(15f);
+                if (count >= num) {
+                    return false;
                 }
 
-                return codes.AsEnumerable();
-            }
-        }
-
-        [HarmonyPatch(typeof(NewCircuitComponentsSegment), "DoPanel")]
-        public class Patch_DoPanel {
-
-            static bool Prefix(ScreenSegmentDisplayOptions options, string panelName, IEnumerable<BoardTypes.ComponentType> list, CircuitBoardDisplay ____ourBoardDisplay) {
-
-                GUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
-                GUILayout.BeginVertical(panelName, ConsoleStyles.Instance.Styles.Segments.OptionalSegmentDarkBackgroundWithHeader.Style);
-
                 try {
-                    int num = 0;
-                    bool flag = false;
-                    float num2 = ((options.MasterRect.width > 0f) ? options.MasterRect.width : ((float)Screen.width * 0.2f));
-                    float width = num2 * 0.47f;
-                    float height = Mathf.Max(30f, (float)Screen.height * 0.03f);
-                    foreach (BoardTypes.ComponentType item in list) {
-                        if (num % 2 == 0) {
-                            if (flag) {
-                                GUILayout.EndHorizontal();
-                            }
 
-                            GUILayout.BeginHorizontal();
-                            flag = true;
+                    var allowedByName = ____ourBoardDisplay.OurBoard.AvailableComponentTypes.ToList().ToDictionary(c => c.Type.FullName, c => c);
+                    var validComponents = new List<(BoardTypes.ComponentType, string?)>();
+
+                    foreach (var panel in FreshBreadGlobal.ComponentLayout!.Panels!) {
+                        validComponents = panel.Components
+                            .Where(c => allowedByName.ContainsKey(c.ComponentClass!))
+                            .Select(c => (allowedByName[c.ComponentClass!], c.NameOverride))
+                            .ToList();
+
+                        if (validComponents.Any()) {
+                            DoPanelExtended(options, panel.PanelName!, validComponents!, panel.NumberOfColumns, FreshBreadGlobal.ComponentLayout.ComponentHeight, ____ourBoardDisplay);
+                            GUILayout.Space(FreshBreadGlobal.ComponentLayout.SpacingBetweenPanels!);
                         }
-                        string text = item.GetHashCode().ToString();
-                        options._s.Circuits.Component.BackgroundTintOnceOff = new Color(0f, 0.7f, 1f, 1f);
-                        InputType inputType = options._s.Circuits.Component.LayoutButton(item.GetName(), text, GUILayout.Width(width), GUILayout.Height(height));
-                        if (inputType == InputType.LeftClick) {
-                            BrilliantSkies.Common.Circuits.Component newComponent = (BrilliantSkies.Common.Circuits.Component)Activator.CreateInstance(item.Type);
-                            ____ourBoardDisplay.AddANewComponent(newComponent);
-                        }
-                        if (GUI.tooltip == text) {
-                            TipDisplayer.Instance.SetTip(item.GetToolTip());
-                        }
-                        num++;
                     }
-                    if (flag) {
-                        GUILayout.EndHorizontal();
-                    }
-                } finally {
-                    GUILayout.EndVertical();
-                    GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
+
+                } catch (Exception e) {
+                    AdvLogger.LogError("Exception while trying to create component layout: " + e.Message + "\n" + e.StackTrace, LogOptions._AlertDevInGame);
                 }
 
                 return false;
+            }
+        }
+
+        private static void DoPanelExtended(ScreenSegmentDisplayOptions options, string panelName, IEnumerable<(BoardTypes.ComponentType ComponentType, string NameOverride)> list, int numColumns, float buttonHeight, CircuitBoardDisplay _ourBoardDisplay) {
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+
+            if (panelName == string.Empty)
+                GUILayout.BeginVertical(ConsoleStyles.Instance.Styles.Segments.OptionalSegmentDarkBackground.Style);
+            else
+                GUILayout.BeginVertical(panelName, ConsoleStyles.Instance.Styles.Segments.OptionalSegmentDarkBackgroundWithHeader.Style);
+
+            try {
+                int colCount = 0;
+                bool colFlag = false;
+                float buttonWidth = options.MasterRect.width * (0.95f / numColumns);
+
+                foreach (var component in list) {
+                    if (colCount % numColumns == 0) {
+                        if (colFlag) {
+                            GUILayout.EndHorizontal();
+                        }
+
+                        GUILayout.BeginHorizontal();
+                        colFlag = true;
+                    }
+                    string text = component.GetHashCode().ToString();
+                    options._s.Circuits.Component.BackgroundTintOnceOff = new Color(0f, 0.7f, 1f, 1f);
+
+                    InputType inputType = options._s.Circuits.Component.LayoutButton(
+                        component.NameOverride == "" ? component.ComponentType.GetName() : component.NameOverride,
+                        text,
+                        GUILayout.Width(buttonWidth), GUILayout.Height(buttonHeight)
+                    );
+
+                    if (inputType == InputType.LeftClick) {
+                        BrilliantSkies.Common.Circuits.Component newComponent = (BrilliantSkies.Common.Circuits.Component)Activator.CreateInstance(component.ComponentType.Type);
+                        _ourBoardDisplay.AddANewComponent(newComponent);
+                    }
+                    if (GUI.tooltip == text) {
+                        TipDisplayer.Instance.SetTip(component.ComponentType.GetToolTip());
+                    }
+                    colCount++;
+                }
+
+                if (colFlag) {
+                    GUILayout.EndHorizontal();
+                }
+
+            } finally {
+                GUILayout.EndVertical();
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
             }
         }
 

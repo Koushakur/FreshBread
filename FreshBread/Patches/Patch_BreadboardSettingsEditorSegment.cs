@@ -104,8 +104,10 @@ namespace FreshBread.Patches {
                 new ToolTip("Key to re-open last opened breadboard with. Expects only A through Z"),
                 delegate (BreadboardSettingsEditorSegment seg, string s) {
 
-                    FreshBreadGlobal.SetKeyCodeFromString(s[..1]);
-                    FreshBreadGlobal.SaveSettings();
+                    if (s != FreshBreadGlobal.ReopenBreadKey.ToString()) {
+                        FreshBreadGlobal.SetKeyCodeFromString(s[..1]);
+                        FreshBreadGlobal.SaveSettings();
+                    }
                 }
             );
             __instance.AddInterpretter(newTextInput);

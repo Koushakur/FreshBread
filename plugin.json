@@ -1,9 +1,10 @@
 {
    "_comments": "QoL",
    "name": "FreshBread",
-   "version": "1.1.0",
-   "gameversion": "4.3.0",
+   "version": "1.3.0",
+   "gameversion": "4.3.3",
    "depends": [],
    "conflicts": [],
-   "filename": "0Harmony.dll,FreshBread.dll"
+   "filename": "0Harmony.dll,FreshBread.dll",
+   "workshop_id": 3703144728
 }

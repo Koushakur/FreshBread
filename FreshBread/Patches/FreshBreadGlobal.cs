@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BrilliantSkies.DataManagement.Vars;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,8 @@ namespace FreshBread.Patches {
 
         public static KeyCode ReopenBreadKey = (KeyCode)121; //Y default;
         public static bool BreadWasClosed = true;
+
+        public static VarBool ShowIDs { get; set; } = new VarBool(false);
 
         public static string LayoutFile = "Layout_FreshBread.json";
         public static Layout? ComponentLayout;
@@ -34,7 +37,8 @@ namespace FreshBread.Patches {
                 var saveJson = JsonConvert.SerializeObject(
                     new FreshSettings {
                         ChosenLayoutFile = LayoutFile,
-                        ReopenBreadKey = ReopenBreadKey.ToString()
+                        ReopenBreadKey = ReopenBreadKey.ToString(),
+                        ShowIDs = ShowIDs
                     }, Formatting.Indented);
 
                 File.WriteAllText(SettingsPath, saveJson);
@@ -54,6 +58,8 @@ namespace FreshBread.Patches {
                 SetKeyCodeFromString(settings!.ReopenBreadKey!);
                 LayoutFile = settings.ChosenLayoutFile!;
                 ReadLayoutFile();
+
+                ShowIDs.Us = settings.ShowIDs;
 
             } catch { }
         }
@@ -78,6 +84,7 @@ namespace FreshBread.Patches {
     public class FreshSettings {
         public string? ReopenBreadKey;
         public string? ChosenLayoutFile;
+        public bool ShowIDs;
     }
 
     public class Layout_Component {

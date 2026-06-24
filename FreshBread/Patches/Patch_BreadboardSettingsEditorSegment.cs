@@ -1,7 +1,9 @@
 ﻿using HarmonyLib;
 using BrilliantSkies.Common.Circuits.Ui.Segments;
+using BrilliantSkies.DataManagement.Vars;
 using BrilliantSkies.Ui.Consoles.Getters;
 using BrilliantSkies.Ui.Consoles.Interpretters.Simple;
+using BrilliantSkies.Ui.Consoles.Interpretters.Subjective.Choices;
 using BrilliantSkies.Ui.Consoles.Interpretters.Subjective.Texts;
 using BrilliantSkies.Ui.Layouts.DropDowns;
 using BrilliantSkies.Ui.Tips;
@@ -81,7 +83,7 @@ namespace FreshBread.Patches {
 
             } catch { }
 
-            DropDown<BreadboardSettingsEditorSegment, string> newInterpretter = new DropDown<BreadboardSettingsEditorSegment, string>(
+            __instance.AddInterpretter(new DropDown<BreadboardSettingsEditorSegment, string>(
                 __instance,
                 dropDownMenuAlt,
                 (BreadboardSettingsEditorSegment seg, string val) => FreshBreadGlobal.LayoutFile == val,
@@ -90,14 +92,12 @@ namespace FreshBread.Patches {
                     FreshBreadGlobal.SaveSettings();
                     FreshBreadGlobal.ReadLayoutFile();
                 }
-            );
-
-            __instance.AddInterpretter(newInterpretter);
+            ));
 
 
             //Hotkey setter
 
-            TextInput<BreadboardSettingsEditorSegment> newTextInput = TextInput<BreadboardSettingsEditorSegment>.Quick(
+            __instance.AddInterpretter(TextInput<BreadboardSettingsEditorSegment>.Quick(
                 __instance,
                 M.m<BreadboardSettingsEditorSegment>((BreadboardSettingsEditorSegment seg) => FreshBreadGlobal.ReopenBreadKey.ToString()),
                 "Bread Key:",
@@ -109,8 +109,21 @@ namespace FreshBread.Patches {
                         FreshBreadGlobal.SaveSettings();
                     }
                 }
-            );
-            __instance.AddInterpretter(newTextInput);
+            ));
+
+
+            //Variable reader/writer ID display toggle
+
+            __instance.AddInterpretter(SubjectiveToggle<Var<bool>>.Quick(
+                FreshBreadGlobal.ShowIDs,
+                "Show IDs on VR/VW",
+                new ToolTip("Whether to Show IDs on Variable Reader/Writer"),
+                delegate (Var<bool> I, bool b) {
+                    I.Us = b;
+                    FreshBreadGlobal.SaveSettings();
+                },
+                I => I.Us
+            ));
         }
     }
 }

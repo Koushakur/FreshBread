@@ -7,7 +7,7 @@ using System.Reflection.Emit;
 namespace FreshBread.Patches {
 
     [HarmonyPatch(typeof(DropDown<object, object>), nameof(DropDown<object, object>.Draw))]
-    public class Patch_DropDown_GenericBlockGetter {
+    public class Patch_DropDown {
 
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
 

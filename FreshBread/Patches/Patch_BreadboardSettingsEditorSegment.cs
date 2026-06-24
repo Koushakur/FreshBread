@@ -117,7 +117,7 @@ namespace FreshBread.Patches {
             __instance.AddInterpretter(SubjectiveToggle<Var<bool>>.Quick(
                 FreshBreadGlobal.ShowIDs,
                 "Show IDs on VR/VW",
-                new ToolTip("Whether to Show IDs on Variable Reader/Writer"),
+                new ToolTip("Whether to show IDs on Variable Reader/Writer"),
                 delegate (Var<bool> I, bool b) {
                     I.Us = b;
                     FreshBreadGlobal.SaveSettings();

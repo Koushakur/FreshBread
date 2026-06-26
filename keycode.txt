@@ -1,6 +1,0 @@
-121
-
-Only the first line of this file will be read
-The topmost line is expected to be a number from 97 to 122, anything else might break things
-97 = A, 98 = B, etc. Default is 121 (Y). BreadThing uses 116 (T)
-List of keycode values: https://gist.github.com/Extremelyd1/4bcd495e21453ed9e1dffa27f6ba5f69

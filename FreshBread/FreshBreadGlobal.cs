@@ -1,4 +1,7 @@
-﻿using BrilliantSkies.DataManagement.Vars;
+﻿using BrilliantSkies.Blocks;
+using BrilliantSkies.Blocks.BreadBoards;
+using BrilliantSkies.Blocks.MissileBreadboard;
+using BrilliantSkies.DataManagement.Vars;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,21 +11,24 @@ using UnityEngine;
 using Component = BrilliantSkies.Common.Circuits.Component;
 
 
-namespace FreshBread.Patches {
+namespace FreshBread {
     public static class FreshBreadGlobal {
 
         public static KeyCode ReopenBreadKey = (KeyCode)121; //Y default;
         public static bool BreadWasClosed = true;
 
-        public static VarBool ShowIDs { get; set; } = new VarBool(false);
-
-        public static string LayoutFile = "Layout_FreshBread.json";
-        public static Layout? ComponentLayout;
+        public static List<Component> ComponentCopyBuffer = new List<Component>();
 
         private static string SettingsFilename = "Fresh_Settings.json";
         private static string SettingsPath;
 
-        public static List<Component> ComponentCopyBuffer = new List<Component>();
+        public static string LayoutFile = "Layout_FreshBread.json";
+        public static Layout? ComponentLayout;
+        public static VarBool ShowIDs { get; set; } = new VarBool(false);
+
+        private static AiBreadboard? _aiBreadboard;
+        private static BreadBoard? _breadBoard;
+        private static MissileBreadboardBlock? _missileBreadboard;
 
         static FreshBreadGlobal() {
 
@@ -79,6 +85,44 @@ namespace FreshBread.Patches {
 
             } catch { }
         }
+
+
+        public static void SetAiBoard(AiBreadboard board) {
+            _aiBreadboard = board;
+            _breadBoard = null;
+            _missileBreadboard = null;
+        }
+
+        public static void SetNonAiBoard(BreadBoard board) {
+            _aiBreadboard = null;
+            _breadBoard = board;
+            _missileBreadboard = null;
+        }
+
+        public static void SetMissileBoard(MissileBreadboardBlock board) {
+            _aiBreadboard = null;
+            _breadBoard = null;
+            _missileBreadboard = board;
+        }
+
+        public static void ActivateLastBread() {
+            if (BreadWasClosed) {
+
+                if ((Block)(object)_breadBoard! != (Block)null! && ((Block)_breadBoard).IsAlive) {
+                    ((Block)_breadBoard).Secondary((Transform)null!);
+                    BreadWasClosed = false;
+
+                } else if ((Block)(object)_aiBreadboard! != (Block)null! && ((Block)_aiBreadboard).IsAlive) {
+                    ((Block)_aiBreadboard).Secondary((Transform)null!);
+                    BreadWasClosed = false;
+
+                } else if ((Block)(object)_missileBreadboard! != (Block)null! && ((Block)_missileBreadboard).IsAlive) {
+                    ((Block)_missileBreadboard).Secondary((Transform)null!);
+                    BreadWasClosed = false;
+
+                }
+            }
+        }
     }
 
     public class FreshSettings {
@@ -87,9 +131,11 @@ namespace FreshBread.Patches {
         public bool ShowIDs;
     }
 
-    public class Layout_Component {
-        public string? NameOverride;
-        public string? ComponentClass;
+    public class Layout {
+        public string? LayoutName;
+        public float SpacingBetweenPanels;
+        public float ComponentHeight;
+        public List<Layout_Panel>? Panels;
     }
 
     public class Layout_Panel {
@@ -98,10 +144,9 @@ namespace FreshBread.Patches {
         public List<Layout_Component>? Components;
     }
 
-    public class Layout {
-        public string? LayoutName;
-        public float SpacingBetweenPanels;
-        public float ComponentHeight;
-        public List<Layout_Panel>? Panels;
+    public class Layout_Component {
+        public string? NameOverride;
+        public string? ComponentClass;
     }
+
 }

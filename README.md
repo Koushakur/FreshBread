@@ -34,4 +34,8 @@ Alt + G -> S without releasing alt inbetween places a Generic block Setter
 * Allow copy-paste components across breadboards  
 * Hide ID on Variable Reader/Writer to reduce size (can be toggled back on)  
 * Allow Missile breadboards to also be re-opened with hotkey  
-* Stop GBSetter from overflwing the window
+* Stop GBSetter from overflowing the window  
+
+#### v1.4.0 - 2026-07-02  
+* Clear indication when a MathEval expression is broken rather than just outputting 0, with also some limited error messaging  
+* MathEval documentation made searchable, and generally freshened up  

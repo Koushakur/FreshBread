@@ -9,9 +9,15 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 using Component = BrilliantSkies.Common.Circuits.Component;
-
+using FreshBread.Layout;
 
 namespace FreshBread {
+    public class FreshSettings {
+        public string? ReopenBreadKey;
+        public string? ChosenLayoutFile;
+        public bool ShowIDs;
+    }
+
     public static class FreshBreadGlobal {
 
         public static KeyCode ReopenBreadKey = (KeyCode)121; //Y default;
@@ -23,7 +29,7 @@ namespace FreshBread {
         private static string SettingsPath;
 
         public static string LayoutFile = "Layout_FreshBread.json";
-        public static Layout? ComponentLayout;
+        public static Layout_Info? ComponentLayout;
         public static VarBool ShowIDs { get; set; } = new VarBool(false);
 
         private static AiBreadboard? _aiBreadboard;
@@ -81,7 +87,7 @@ namespace FreshBread {
                 var layoutPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Layouts", LayoutFile);
                 var layoutJson = File.ReadAllText(layoutPath);
 
-                ComponentLayout = JsonConvert.DeserializeObject<Layout>(layoutJson)!;
+                ComponentLayout = JsonConvert.DeserializeObject<Layout_Info>(layoutJson)!;
 
             } catch { }
         }
@@ -119,34 +125,9 @@ namespace FreshBread {
                 } else if ((Block)(object)_missileBreadboard! != (Block)null! && ((Block)_missileBreadboard).IsAlive) {
                     ((Block)_missileBreadboard).Secondary((Transform)null!);
                     BreadWasClosed = false;
-
                 }
             }
         }
-    }
-
-    public class FreshSettings {
-        public string? ReopenBreadKey;
-        public string? ChosenLayoutFile;
-        public bool ShowIDs;
-    }
-
-    public class Layout {
-        public string? LayoutName;
-        public float SpacingBetweenPanels;
-        public float ComponentHeight;
-        public List<Layout_Panel>? Panels;
-    }
-
-    public class Layout_Panel {
-        public string? PanelName;
-        public int NumberOfColumns;
-        public List<Layout_Component>? Components;
-    }
-
-    public class Layout_Component {
-        public string? NameOverride;
-        public string? ComponentClass;
     }
 
 }

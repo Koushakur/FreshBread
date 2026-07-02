@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using BrilliantSkies.Ui.Consoles;
 using BrilliantSkies.Common.Circuits.Ui;
 using BrilliantSkies.Common.Circuits.Ui.Segments;
+using FreshBread.Internal;
 
 
 namespace FreshBread.Patches {

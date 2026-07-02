@@ -9,6 +9,7 @@ using BrilliantSkies.Ui.Consoles.Segments;
 using BrilliantSkies.Ui.Consoles.Styles;
 using BrilliantSkies.Ui.Layouts.DropDowns;
 using BrilliantSkies.Ui.Tips;
+using FreshBread.Layout;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -16,8 +17,8 @@ using System.Reflection;
 using UnityEngine;
 
 
-namespace FreshBread {
-    public class FreshBreadSettingsSegment : ScreenSegmentTable {
+namespace FreshBread.Internal {
+    public class FreshBreadSettingsSegment : BrilliantSkies.Ui.Consoles.Segments.ScreenSegmentTable {
 
         public FreshBreadSettingsSegment(ConsoleUiScreen ourScreen, CircuitBoardDisplay boardDisplay)
             : base(ourScreen, 4, 4) {
@@ -35,7 +36,7 @@ namespace FreshBread {
 
                 Resize(2, 3);
 
-                //Layout selector
+                #region Layout selector
 
                 DropDownMenuAlt<string> dropDownMenuAlt = new DropDownMenuAlt<string>((TextAnchor)4);
 
@@ -47,12 +48,12 @@ namespace FreshBread {
                     var dropDownItems = new List<DropDownMenuAltItem<string>>();
 
                     string fileText;
-                    Layout layoutJson;
+                    Layout_Info layoutJson;
 
                     foreach (var file in layoutFiles) {
 
                         fileText = File.ReadAllText(file);
-                        layoutJson = JsonConvert.DeserializeObject<Layout>(fileText)!;
+                        layoutJson = JsonConvert.DeserializeObject<Layout_Info>(fileText)!;
                         dropDownItems.Add(new DropDownMenuAltItem<string> { ObjectForAction = Path.GetFileName(file), Name = $"Layout: {layoutJson!.LayoutName}" });
                     }
 
@@ -71,8 +72,9 @@ namespace FreshBread {
                     }
                 ));
 
+                #endregion
 
-                //Variable reader/writer ID display toggle
+                #region Variable reader/writer ID display toggle
 
                 AddInterpretter(SubjectiveToggle<Var<bool>>.Quick(
                     FreshBreadGlobal.ShowIDs,
@@ -85,8 +87,9 @@ namespace FreshBread {
                     I => I.Us
                 ));
 
+                #endregion
 
-                //Hotkey setter
+                #region Hotkey setter
 
                 AddInterpretter(TextInput<FreshBreadSettingsSegment>.Quick(
                     this,
@@ -101,6 +104,8 @@ namespace FreshBread {
                         }
                     }
                 ));
+
+                #endregion
 
             }
 

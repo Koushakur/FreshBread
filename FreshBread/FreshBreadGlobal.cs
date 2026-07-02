@@ -2,14 +2,15 @@
 using BrilliantSkies.Blocks.BreadBoards;
 using BrilliantSkies.Blocks.MissileBreadboard;
 using BrilliantSkies.DataManagement.Vars;
+using FreshBread.Layout;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Component = BrilliantSkies.Common.Circuits.Component;
-using FreshBread.Layout;
 
 namespace FreshBread {
     public class FreshSettings {
@@ -128,6 +129,10 @@ namespace FreshBread {
                 }
             }
         }
-    }
 
+        public static string StripRichText(string input) {
+            return Regex.Replace(input, "<.*?>", "");
+        }
+
+    }
 }

@@ -36,7 +36,12 @@ namespace FreshBread.Patches {
                 } catch (Exception e) {
 
                     if (e.Message[0..22] == "Unrecognised character") {
-                        ErrorMessagesMathEval.SetError(__instance, "Error probably near '" + e.Message[23..24] + "'");
+                        var token = e.Message[23..24];
+                        if (token == ")")
+                            ErrorMessagesMathEval.SetError(__instance, "Unknown error");
+                        else
+                            ErrorMessagesMathEval.SetError(__instance, "Error probably near '" + token + "'");
+
                     } else {
                         ErrorMessagesMathEval.SetError(__instance, e.Message);
                     }

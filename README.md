@@ -39,3 +39,8 @@ Alt + G -> S without releasing alt inbetween places a Generic block Setter
 #### v1.4.0 - 2026-07-02  
 * Clear indication when a MathEval expression is broken rather than just outputting 0, with also some limited error messaging  
 * MathEval documentation made searchable, and generally freshened up  
+
+#### v1.5.0 - 2026-10-10
+* Show filter name on block setters/getters when one is set
+* Added button linking to the community-made Book of Breadboard
+* Simplify and remove rounding in text for accumulator, one shot, threshold and random number

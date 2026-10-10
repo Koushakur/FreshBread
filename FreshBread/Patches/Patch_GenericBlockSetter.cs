@@ -10,33 +10,54 @@ using static BrilliantSkies.Blocks.BreadBoards.GenericBlockSetter;
 
 namespace FreshBread.Patches {
 
-    [HarmonyPatch(typeof(GenericBlockSetter), nameof(GenericBlockSetter.PopulateSegment))]
     public class Patch_GenericBlockSetter {
 
-        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+        [HarmonyPatch(typeof(GenericBlockSetter), nameof(GenericBlockSetter.PopulateSegment))]
+        public class Patch_GenericBlockSetter_PopulateSegment {
 
-            var codes = instructions.ToList();
-            var outCodes = new List<CodeInstruction>();
+            static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
 
-            for (int i = 0; i < codes.Count; i++) {
+                var codes = instructions.ToList();
+                var outCodes = new List<CodeInstruction>();
 
-                outCodes.Add(codes[i]);
+                for (int i = 0; i < codes.Count; i++) {
 
-                if (codes[i].opcode == OpCodes.Newobj
-                    && codes[i].operand is ConstructorInfo ci
-                    && ci.DeclaringType != null
-                    && ci.DeclaringType.IsGenericType
-                    && ci.DeclaringType == typeof(DropDown<GenericBlockSetter, ModuleAttributePair>)) {
+                    outCodes.Add(codes[i]);
 
-                    MethodInfo setter = AccessTools.PropertySetter(ci.DeclaringType, "LimitToMasterRectWidth");
+                    if (codes[i].opcode == OpCodes.Newobj
+                        && codes[i].operand is ConstructorInfo ci
+                        && ci.DeclaringType != null
+                        && ci.DeclaringType.IsGenericType
+                        && ci.DeclaringType == typeof(DropDown<GenericBlockSetter, ModuleAttributePair>)) {
 
-                    outCodes.Add(new CodeInstruction(OpCodes.Dup));
-                    outCodes.Add(new CodeInstruction(OpCodes.Ldc_I4_1));
-                    outCodes.Add(new CodeInstruction(OpCodes.Callvirt, setter));
+                        MethodInfo setter = AccessTools.PropertySetter(ci.DeclaringType, "LimitToMasterRectWidth");
+
+                        outCodes.Add(new CodeInstruction(OpCodes.Dup));
+                        outCodes.Add(new CodeInstruction(OpCodes.Ldc_I4_1));
+                        outCodes.Add(new CodeInstruction(OpCodes.Callvirt, setter));
+                    }
                 }
-            }
 
-            return outCodes;
+                return outCodes;
+            }
+        }
+
+
+        [HarmonyPatch(typeof(GenericBlockSetter), nameof(GenericBlockSetter.GetString))]
+        public class Patch_GenericBlockSetter_GetString {
+            public static bool Prefix(
+                GenericBlockSetter __instance,
+                ModuleAttributePair ____moduleAttributePair,
+                string ____errorString,
+                out string __result
+            ) {
+                var _locFile = GenericBlockSetter._locFile;
+
+                __result = string.Format("{0} (#{1}{4})\n{2}\n{3}", __instance.BlockType?.Name ?? _locFile.Get("String_PickABlock", "[pick a block]"), __instance.PotentiallyAffectedBlocks.Count, ____moduleAttributePair?.Name ?? _locFile.Get("String_PickAProperty", "[pick a property]"), ____errorString, __instance.BlockFilter.Us != string.Empty ? ": '" + __instance.BlockFilter.Us + "'" : "");
+
+                return false;
+
+            }
         }
 
     }

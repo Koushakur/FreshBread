@@ -11,6 +11,7 @@ using BrilliantSkies.Ui.Consoles.Interpretters.Subjective.Buttons;
 using BrilliantSkies.Ui.Consoles.Interpretters.Subjective.Texts;
 using BrilliantSkies.Ui.Tips;
 using System;
+using UnityEngine;
 
 
 namespace FreshBread.Patches {
@@ -77,21 +78,28 @@ namespace FreshBread.Patches {
 
             public static bool Prefix(
                 Evaluator __instance,
-                CircuitComponentEditorSegment segment, CircuitBoardDisplay displayer
+                CircuitComponentEditorSegment segment,
+                CircuitBoardDisplay displayer
                 ) {
 
                 var _locFile = Evaluator._locFile;
 
                 segment.Resize(1, 10);
+
                 TextInput<Evaluator> textInput = segment.AddInterpretter(TextInput<Evaluator>.Quick(__instance, M.m((Evaluator I) => (Var<string>)I.Expression), _locFile.Get("Input_Expression", "Expression:"), new ToolTip(_locFile.Get("Input_Expression_Tip", "Write the expression you want to evaluate here")), delegate (Evaluator I, string s) {
                     I.Expression.Us = s;
                 }));
                 textInput.UseTextArea = true;
                 textInput.AllowRichTextInEditor = false;
 
-                segment.AddInterpretter(SubjectiveButton<Evaluator>.Quick(__instance, _locFile.Get("Button_ShowDocumentation", "Show documentation"), new ToolTip(_locFile.Get("Button_ShowDocumentation_Tip", "Shows all the functions and operators vailable in the maths evaluator")), delegate (Evaluator I) {
-                    I.ShowDocumentation();
-                }));
+                segment.AddInterpretter(new InterpretterGroupHorizontal(
+                    SubjectiveButton<Evaluator>.Quick(__instance, _locFile.Get("Button_ShowDocumentation", "Show documentation"), new ToolTip(_locFile.Get("Button_ShowDocumentation_Tip", "Shows all the functions and operators vailable in the maths evaluator")), delegate (Evaluator I) {
+                        I.ShowDocumentation();
+                    }),
+                    SubjectiveButton<Evaluator>.Quick(__instance, "Book of Breadboard", new ToolTip("Open a browser page with the community's breadboard help book\nFor both beginners and veterans"), delegate (Evaluator I) {
+                        Application.OpenURL("https://docs.google.com/document/d/1WjDCb5B6nOYT07TdgxbMTcZ-En_gAEThQB-23_0863E/");
+                    })
+                ));
 
                 segment.AddInterpretter(SubjectiveDisplay<Evaluator>.Quick(__instance,
                     M.m<Evaluator>((Evaluator e) => ErrorMessagesMathEval.GetError(e)),

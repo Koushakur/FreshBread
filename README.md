@@ -1,6 +1,6 @@
 <h2 align="center">A mod for From the Depths that freshens up the Breadboard UX</h2>
 <p align="center">
-<img width="480" height="300" alt="Compares modified and unmodified UI with a sweeping wipe transition" src="https://github.com/user-attachments/assets/885671b3-f333-4ebe-a3e1-46a3e090fa9a" />  
+<img width="480" height="300" alt="Compares modified and unmodified UI with a sweeping wipe transition" src="https://github.com/user-attachments/assets/a25f156a-7e24-43ad-bb91-6b5def59d5ee" />  
 </p>
 <hr/>
 Cleans up the design and adds quality-of-life

@@ -82,15 +82,16 @@
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Switch" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Vector3Splitter" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Vector3Combiner" },
-            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.VectorMagnitude" }
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.VectorMagnitude" },
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.OneShot" },
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Delay" },
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.AngleWrap" }
          ]
       },
-      {
+            {
          "PanelName": "",
          "NumberOfColumns": 2,
          "Components": [
-            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.OneShot" },
-            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Delay" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiBehaviourSelect" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Blocks.BreadBoards.Ai.AiManoeuvreSelect" }
          ]

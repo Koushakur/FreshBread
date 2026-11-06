@@ -89,7 +89,8 @@
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Delay" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Switch" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Accumulator" },
-            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.FuzzyThreshold" }
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.FuzzyThreshold" },
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.AngleWrap" }
          ]
       },
       {

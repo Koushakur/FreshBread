@@ -57,6 +57,7 @@
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Vector3Combiner" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.VectorMagnitude" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Distance2D" },
+            { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.AngleWrap" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Differencer" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.Accumulator" },
             { "NameOverride": "", "ComponentClass": "BrilliantSkies.Common.Circuits.ComponentTypes.FuzzyThreshold" },

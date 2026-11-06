@@ -147,6 +147,24 @@ namespace FreshBread.Patches {
 
                 case Language.RU:
                     return text.Replace("№1", "№1 до №26");
+
+                case Language.PL:
+                    return text.Replace("pierwszego", "pierwszego do dwudziestego szóstego");
+
+                case Language.SV:
+                    return text.Replace("första", "första till tjugosjätte");
+
+                case Language.ptBZ:
+                    return text.Replace("primeira", "primeira ao vigésima sexta");
+
+                case Language.DE:
+                    return text.Replace("ersten", "ersten bis zum sechsundzwanzigsten");
+
+                case Language.FR:
+                    return text.Replace("première", "première au vingt-sixième");
+
+                case Language.ES:
+                    return text.Replace("primera", "primera al vigésima sexta");
             }
 
             return text;

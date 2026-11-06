@@ -1,6 +1,6 @@
 <h2 align="center">A mod for From the Depths that freshens up the Breadboard UX</h2>
 <p align="center">
-<img width="480" height="300" alt="Compares modified and unmodified UI with a sweeping wipe transition" src="https://github.com/user-attachments/assets/885671b3-f333-4ebe-a3e1-46a3e090fa9a" />  
+<img width="480" height="300" alt="Compares modified and unmodified UI with a sweeping wipe transition" src="https://github.com/user-attachments/assets/a25f156a-7e24-43ad-bb91-6b5def59d5ee" />  
 </p>
 <hr/>
 Cleans up the design and adds quality-of-life
@@ -39,3 +39,8 @@ Alt + G -> S without releasing alt inbetween places a Generic block Setter
 #### v1.4.0 - 2026-07-02  
 * Clear indication when a MathEval expression is broken rather than just outputting 0, with also some limited error messaging  
 * MathEval documentation made searchable, and generally freshened up  
+
+#### v1.5.0 - 2026-10-10
+* Show filter name on block setters/getters when one is set
+* Added button linking to the community-made Book of Breadboard
+* Simplify and remove rounding in text for accumulator, one shot, threshold and random number

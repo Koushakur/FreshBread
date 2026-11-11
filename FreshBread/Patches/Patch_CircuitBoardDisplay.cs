@@ -55,19 +55,19 @@ namespace FreshBread.Patches {
                 var outCodes = new List<CodeInstruction>();
 
                 var targetField = AccessTools.Field(typeof(Patch_CircuitBoardDisplay_DisplayBoard), nameof(Patch_CircuitBoardDisplay_DisplayBoard.inputEvent));
+                var eventCurrent = AccessTools.PropertyGetter(typeof(Event), nameof(Event.current));
 
                 FieldInfo copiedComponentsField = AccessTools.Field(typeof(CircuitBoardDisplay), "_copiedComponents");
                 MethodInfo copyToBufferFunc = AccessTools.Method(typeof(Patch_CircuitBoardDisplay), nameof(Patch_CircuitBoardDisplay.CopyCopiedIntoBuffer));
 
                 for (int i = 0; i < codes.Count; i++) {
 
-                    if (codes[i].opcode == OpCodes.Ret) {
-                        //Weirdly roundabout way to get access to "current2" created inside the original method, doesn't seem to exists any easier way
-                        outCodes.Add(new CodeInstruction(OpCodes.Ldloc_S, 5));
+                    outCodes.Add(codes[i]);
+
+                    if (codes[i].Calls(eventCurrent)) {
+                        outCodes.Add(new CodeInstruction(OpCodes.Dup));
                         outCodes.Add(new CodeInstruction(OpCodes.Stsfld, targetField));
                     }
-
-                    outCodes.Add(codes[i]);
 
                     if (i - 3 < 0)
                         continue;
@@ -96,7 +96,7 @@ namespace FreshBread.Patches {
             static void Postfix(
                 CircuitBoardDisplay __instance,
                 List<Component> ____selectedComponents,
-                ulong ____lastComponentPlacementFrame,
+                ref ulong ____lastComponentPlacementFrame,
                 BoardUndoRedoSystem ____undoRedoSystem
             ) {
 
@@ -430,8 +430,8 @@ namespace FreshBread.Patches {
                         vector *= instance.OurBoard.GridSize.Us;
                     }
 
-                    newComponent.X.AlterDefault(vector.x);
-                    newComponent.Y.AlterDefault(vector.y);
+                    newComponent.X.Us = vector.x;
+                    newComponent.Y.Us = vector.y;
                     AddComponentCommand command = new AddComponentCommand(instance.OurBoard, newComponent);
 
                     undoRedoSystem.ExecuteCommand(command);
